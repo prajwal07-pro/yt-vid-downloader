@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './Downloader.css';
 
+// ⚠️ CHANGE THIS - Use your ngrok HTTPS URL
+const API_URL = 'https://circuital-chantel-needful.ngrok-free.dev'; 
+
 function Downloader() {
   const [url, setUrl] = useState('');
   const [videoInfo, setVideoInfo] = useState(null);
@@ -19,7 +22,7 @@ function Downloader() {
     setVideoInfo(null);
 
     try {
-      const response = await fetch('https://circuital-chantel-needful.ngrok-free.dev/api/info', {
+      const response = await fetch(`${API_URL}/api/info`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })
@@ -39,7 +42,7 @@ function Downloader() {
   };
 
   const handleDownload = () => {
-    const downloadUrl = `https://circuital-chantel-needful.ngrok-free.dev/api/download?url=${encodeURIComponent(url)}&type=${downloadType}&quality=highest`;
+    const downloadUrl = `${API_URL}/api/download?url=${encodeURIComponent(url)}&type=${downloadType}&quality=highest`;
     window.open(downloadUrl, '_blank');
   };
 
